@@ -9,12 +9,14 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ContactosService } from './services/contactos.service';
 import { HttpClientModule } from '@angular/common/http';
+import { InputsComponent } from './shared/inputs/inputs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BodyComponent,
-    HeaderComponent
+    HeaderComponent,
+    InputsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,21 +1,29 @@
 <div class="col-8">
     <h6>Formulario</h6>
     <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="card p-5">
-        <input hidden type="text" [(ngModel)]=id name="id" />
+        <input hidden type="text" [(ngModel)]=contacto.id name="id" />
         <div class="form-group">
             <label for="nombre">Nombre</label>
-            <input type="text" [(ngModel)]='nombre' name='nombre' class="form-control" id="nombre">
+            <input type="text" required [(ngModel)]='contacto.nombre' name='nombre' class="form-control" id="nombre">
         </div>
         <div class="form-group">
-            <label for="telefono">Teléfono</label>
-            <input type="text" [(ngModel)]='telefono' name='telefono' class="form-control" id="telefono">
+            <label for="telefono">Teléfono principal</label>
+            <input type="text" required [(ngModel)]='contacto.telefono' name='telefono' class="form-control" id="telefono">
         </div>
-        <!-- <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        <!-- <div class="form-group">
+            <a *ngIf="telefonos.length<4" (click)='otro()'>Otro mas</a>
+            <a *ngIf="telefonos.length>1" (click)='eliminar()'>Eliminar el último</a>
         </div> -->
         <button type="submit" class="btn btn-primary">Agregar</button>
     </form>
+    <div>
+        <form>
+            <div class="form-group">
+                <label for="file">Choose File</label>
+                <input type="file" id="file" name="file" (change)="handleFileInput($event.target.files[0])" accept="application/JSON">
+            </div>
+        </form>
+    </div>
     <div class="table-responsive">
         <table class="table">
             <thead>
@@ -29,8 +37,22 @@
                     <th>
                         Teléfono
                     </th>
+                    <th>
+                        Action
+                    </th>
                 </tr>
             </thead>
+            <tbody *ngIf="contactos!=null">
+                <tr *ngFor="let item of contactos">
+                    <td>{{item.id}}</td>
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.telefono}}</td>
+                    <td>
+                        <a href="#" (click)='edit(item.id)'>Editar</a>||
+                        <a href="#" (click)='delete(item.id)'>Borrar</a>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>
